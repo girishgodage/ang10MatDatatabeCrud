@@ -1,0 +1,110 @@
+<div class="table-wrapper">
+
+    <h2> Manage Employee </h2>
+    <!-- Form to edit/add row -->
+    <form (submit)="onSubmit()" #employeeForm="ngForm">
+        
+        <mat-form-field>
+            <input matInput placeholder="User Id" name="userId" required [(ngModel)]="employeeData.userId">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Job TitleName" name="jobTitleName" required [(ngModel)]="employeeData.jobTitleName">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="first Name" name="firstName" required [(ngModel)]="employeeData.firstName">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Last Name" name="lastName" required [(ngModel)]="employeeData.lastName">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Preferred FullName" name="preferredFullName" required [(ngModel)]="employeeData.preferredFullName">
+        </mat-form-field>        
+        <mat-form-field>
+            <input matInput placeholder="Employee Code" name="employeeCode" required [(ngModel)]="employeeData.employeeCode">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Region" name="region" required [(ngModel)]="employeeData.region">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Phone Number" name="phoneNumber" required [(ngModel)]="employeeData.phoneNumber">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Email Address" name="emailAddress" required [(ngModel)]="employeeData.emailAddress">
+        </mat-form-field>
+
+        <ng-container *ngIf="isEditMode; else elseTemplate">
+            <button mat-button color="primary">Update</button>
+            <a mat-button color="warn" (click)="cancelEdit()">Cancel</a>
+        </ng-container>
+        <ng-template #elseTemplate>
+            <button mat-button color="primary">Add</button>
+        </ng-template>
+
+    </form>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> #Id </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="userId">
+        <th mat-header-cell *matHeaderCellDef> User Id </th>
+        <td mat-cell *matCellDef="let element"> {{element.userId}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="jobTitleName">
+        <th mat-header-cell *matHeaderCellDef> jobTitle Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.jobTitleName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="firstName">
+        <th mat-header-cell *matHeaderCellDef> First Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="lastName">
+        <th mat-header-cell *matHeaderCellDef> Last Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="preferredFullName">
+        <th mat-header-cell *matHeaderCellDef> Preferred FullName </th>
+        <td mat-cell *matCellDef="let element"> {{element.preferredFullName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="employeeCode">
+        <th mat-header-cell *matHeaderCellDef> Employee Code </th>
+        <td mat-cell *matCellDef="let element"> {{element.employeeCode}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="region">
+        <th mat-header-cell *matHeaderCellDef> Region </th>
+        <td mat-cell *matCellDef="let element"> {{element.region}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="phoneNumber">
+        <th mat-header-cell *matHeaderCellDef> Phone Number </th>
+        <td mat-cell *matCellDef="let element"> {{element.phoneNumber}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="emailAddress">
+        <th mat-header-cell *matHeaderCellDef> Email Address </th>
+        <td mat-cell *matCellDef="let element"> {{element.emailAddress}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let element">
+            <a href="javascript:void(0)" (click)="editItem(element)">Edit</a> |
+            <a href="javascript:void(0)" (click)="deleteItem(element.id)">Delete</a>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+        [ngClass]="{'editable-row': employeeData.id === row.id}"></tr>
+</table>
+<mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+</div>
