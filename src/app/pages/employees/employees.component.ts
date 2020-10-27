@@ -5,6 +5,7 @@ import * as _ from 'lodash';
 import { Employee } from 'src/app/models/employee';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-employees',
@@ -21,6 +22,7 @@ export class EmployeesComponent implements OnInit {
   dataSource = new MatTableDataSource();
   displayedColumns: string[] = ['id', 'userId', 'jobTitleName', 'firstName','lastName','preferredFullName','employeeCode','region', 'phoneNumber','emailAddress','actions'];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   isEditMode = false;
 
@@ -31,11 +33,16 @@ export class EmployeesComponent implements OnInit {
   ngOnInit(): void {
     // Initializing Datatable pagination
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
 
     // Fetch All Employees on Page load
     this.getAllEmployees();
   }
 
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+  
   getAllEmployees(){
     this.httpDataService.getList().subscribe((response: any) => {
       this.dataSource.data = response;

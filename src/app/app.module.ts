@@ -13,6 +13,9 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+
+import { MatSortModule } from '@angular/material/sort';
+
 import { EmployeesComponent } from './pages/employees/employees.component';
 
 @NgModule({
@@ -33,7 +36,8 @@ import { EmployeesComponent } from './pages/employees/employees.component';
     MatTableModule,
     MatPaginatorModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]
